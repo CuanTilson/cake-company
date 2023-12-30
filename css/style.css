@@ -1,0 +1,2611 @@
+/***
+    The new CSS reset - version 1.7.3 (last updated 7.8.2022)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+    cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+    list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+    max-width: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+    --webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+    white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+    -webkit-appearance: revert;
+    appearance: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+    color: unset;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+    display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable="false"])) {
+    -moz-user-modify: read-write;
+    -webkit-user-modify: read-write;
+    overflow-wrap: break-word;
+    --webkit-line-break: after-white-space;
+    --webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+    -webkit-user-drag: element;
+}
+
+/*CSS starts here*/
+@font-face {
+    font-family: 'Calibri';
+    src: url('../fonts/calibri.woff') format('woff'),
+        url('../fonts/calibri.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Calibri';
+    src: url('../fonts/calibrib.woff') format('woff'),
+        url('../fonts/calibrib.ttf') format('truetype');
+    font-weight: bold;
+}
+
+html {
+    font-size: 1px;
+}
+
+html,
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+/*Overall style of content pages*/
+
+.bottomSpace {
+    height: 70px;
+    background-image: url('../images/ffffff.png');
+}
+
+/*Current link*/
+.current {
+    font-family: 'Calibri';
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+
+    /*Overall style of mobile navigation*/
+    .mobileNavContainer {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .topNav {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas:
+            "logo . ."
+            "logo . menuIcon"
+            "logo . .";
+        top: 0;
+        left: 0;
+        align-items: center;
+    }
+
+    .logo {
+        grid-area: logo;
+    }
+
+    .menuIcon {
+        grid-area: menuIcon;
+        z-index: 1;
+    }
+
+    .hamburger {
+        float: right;
+        position: absolute;
+        position: relative;
+        display: block;
+        width: 45px;
+        cursor: pointer;
+        background: none;
+        outline: none;
+        border: none;
+    }
+
+    .hamburger .bar,
+    .hamburger:after,
+    .hamburger:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 5px;
+        background-color: #000;
+        margin: 6px 0px;
+        transition: 0.4s;
+    }
+
+    .hamburger.is-active:before {
+        transform: rotate(-45deg) translate(-8px, 6px);
+    }
+
+    .hamburger.is-active:after {
+        transform: rotate(45deg) translate(-9px, -8px);
+    }
+
+    .hamburger.is-active .bar {
+        opacity: 0;
+    }
+
+    .sideNav {
+        position: fixed;
+        right: -500px;
+        width: 300px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: -15px 0px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: -15px 0px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: -15px 0px 20px 5px rgba(0, 0, 0, 0.6);
+        transition: .5s;
+        padding: 150px 0px;
+        z-index: 1;
+    }
+
+    .sideNav nav>div {
+        padding: 20px 30px;
+        font-size: 25rem;
+        color: #000;
+        font-family: 'Calibri';
+        text-align: right;
+    }
+
+    .sideNav.active {
+        right: 0;
+    }
+
+    .sideNav .social {
+        margin-top: 70px;
+        margin-left: 90px;
+        width: 50%;
+        display: flex;
+    }
+
+    .sideNav .social>div {
+        margin: auto;
+        width: 40rem;
+    }
+
+    .sideNav .logo {
+        display: none;
+    }
+
+    /*Overall style of content pages*/
+    .contentContainer {
+        font-size: 20rem;
+        color: #000;
+        font-family: 'Calibri';
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .contentContainer .heading {
+        margin-top: 25rem;
+        font-size: 25rem;
+        font-weight: bold;
+    }
+
+    hr.headinglinebreak {
+        border: 0;
+        height: 1px;
+        background: #333;
+        background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    }
+
+    .headinglinebreak {
+        width: 100%;
+        margin: 0 0 35rem 0;
+    }
+
+    /*Home page*/
+    .hero {
+        margin: 45px auto;
+        max-width: 90%;
+        width: auto;
+        max-height: 100%;
+        height: auto;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero img {
+        display: block;
+    }
+
+    /*About page*/
+    .abouttext {
+        text-align: left;
+        margin-top: 25rem;
+    }
+
+    .colouredvbar {
+        color: #FFA500;
+    }
+
+    .ballyfinItalic {
+        font-style: italic;
+        color: #949494;
+    }
+
+    .smallSpace {
+        font-size: 10rem;
+    }
+
+    /*Contact page*/
+    .contactGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 0.05fr 0.35fr 0.05fr 0.5fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "form"
+            "."
+            "address"
+            "."
+            "map";
+    }
+
+    /*Address*/
+    .address {
+        grid-area: address;
+        text-align: left;
+    }
+
+    .smallPhone {
+        line-height: 60rem;
+    }
+
+    .contactTextBorder {
+        width: 100%;
+        height: 100%;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+        display: flex;
+        margin-right: 0rem;
+    }
+
+    .contactText {
+        line-height: 25rem;
+        margin: auto;
+    }
+
+    /*Map*/
+    #map {
+        grid-area: map;
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    /*Form*/
+    .form {
+        grid-area: form;
+    }
+
+    .formContainer {
+        width: 100%;
+        max-width: 700rem;
+        padding: 20rem;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    .requiredStar {
+        color: red;
+    }
+
+    .form-group #firstName, #lastName {
+        max-width: 30%;
+    }
+
+    .form-group #email,
+    #confirmEmail {
+        max-width: 50%;
+    }
+
+    .form-group #mobileNumber,
+    #landlineNumber {
+        max-width: 30%;
+    }
+
+    .form-group {
+        max-width: 100%;
+        margin-top: 20rem;
+        font-size: 20rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 5rem;
+        font-size: 18rem;
+        border: 1rem solid #D4D4D4;
+        margin-top: 5rem;
+        background-color: #ECECEC;
+        font-family: 'Calibri';
+    }
+
+    .form-group>textarea {
+        resize: vertical;
+    }
+
+    .form-group p {
+        margin-bottom: 5rem;
+    }
+
+    /*Radio styling*/
+    .radioContainer {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 5px;
+        width: 150rem;
+        cursor: pointer;
+        font-size: 18px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .radioContainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: default;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        border: 1rem solid #D4D4D4;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .radioContainer:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .radioContainer input:checked~.checkmark {
+        background-color: #D4D4D4;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .radioContainer input:checked~.checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .radioContainer .checkmark:after {
+        top: 5px;
+        left: 5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    /*Checkbox styling*/
+    .checkboxContainer {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 18px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .checkboxContainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkboxCheckmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border: 1rem solid #D4D4D4;
+        border-radius: 5rem;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .checkboxContainer:hover input~.checkboxCheckmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .checkboxContainer input:checked~.checkboxCheckmark {
+        background-color: #D4D4D4;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkboxCheckmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .checkboxContainer input:checked~.checkboxCheckmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .checkboxContainer .checkboxCheckmark:after {
+        left: 7px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    /*Dropdown/select styling*/
+    .selectdiv {
+        position: relative;
+        /*Don't really need this just for demo styling*/
+    }
+
+    /*IE11 hide native button*/
+    select::-ms-expand {
+        display: none;
+    }
+
+    .selectdiv:after {
+        content: "<>";
+        font: 17px "Consolas", monospace;
+        color: #333;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        left: 195px;
+        /*Adjust for position however you want*/
+        top: 37px;
+        padding: 0 0 2px;
+        /*left line */
+        border-bottom: 1px solid #999;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .selectdiv select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* Add some styling */
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        height: 40px;
+        margin: 5px 0px;
+        padding: 0px 15px;
+        font-size: 18px;
+        line-height: 2;
+        color: rgb(0, 0, 0);
+        background-color: #ECECEC;
+        background-image: none;
+        border: 1rem solid #D4D4D4;
+        border-radius: 5rem;
+        -ms-word-break: normal;
+        word-break: normal;
+    }
+
+    .forminput {
+        border-radius: 5rem;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 20px;
+        font-size: 24px;
+        border-radius: 8rem;
+        background-color: #ECECEC;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #D4D4D4;
+    }
+
+    /*Gallery pages*/
+    .galleryGrid {
+        --gap: 16px;
+        --num-cols: 4;
+        --row-height: 100px;
+
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: repeat(var(--num-cols), 1fr);
+        grid-auto-rows: var(--row-height);
+        gap: var(--gap);
+    }
+
+    .galleryGrid button img,
+    video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .image-grid-col-1 {
+        grid-column: span 1;
+    }
+
+    .image-grid-row-1 {
+        grid-row: span 1;
+    }
+
+    .image-grid-col-2 {
+        grid-column: span 2;
+    }
+
+    .image-grid-row-2 {
+        grid-row: span 2;
+    }
+
+    .image-grid-col-3 {
+        grid-column: span 3;
+    }
+
+    .image-grid-row-3 {
+        grid-row: span 3;
+    }
+
+    /*Cake click pop-up*/
+    .popup {
+        display: contents;
+    }
+
+    .popup .overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+
+    .popup .content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #fff;
+        z-index: 2;
+        text-align: left;
+        box-sizing: border-box;
+        height: 95%;
+        width: 90%;
+        font-family: 'Calibri';
+        padding: 75rem 25rem 50rem 25rem;
+        line-height: 1.3;
+        overflow-y: scroll;
+    }
+
+    .popup .popupheading {
+        font-weight: bold;
+        margin-bottom: 25rem;
+    }
+
+    .popup .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+    }
+
+    .popup.active .overlay {
+        display: block;
+    }
+
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popupbutton {
+        cursor: pointer;
+    }
+
+    .slides img,
+    video {
+        margin: auto;
+        display: block;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        margin-bottom: 25rem;
+    }
+
+    .content .portrait {
+        max-width: 100%;
+        width: auto;
+        max-height: 100%;
+        height: auto;
+    }
+
+    .content .landscape {
+        max-width: 100%;
+        width: auto;
+        max-height: 100%;
+        height: auto;
+    }
+
+    /*Pop-up gallery*/
+    .slideshow-container {
+        max-width: 900px;
+        position: relative;
+        margin: auto;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 40%;
+        padding: 15px;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        user-select: none;
+        text-align: center;
+        width: 50rem;
+        height: 50rem;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .dots {
+        text-align: center;
+        margin-bottom: 15rem;
+    }
+
+    .activeDot,
+    .dot:hover {
+        background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    /*Wedding resources page*/
+    .weddingResourcesGrid {
+        --gap: 50px;
+        --num-cols: 1;
+        --row-height: 600px;
+
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: repeat(var(--num-cols), 1fr);
+        grid-auto-rows: var(--row-height);
+        gap: var(--gap);
+    }
+
+    .squareBorder {
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    .imageContainer {
+        width: 100%;
+        height: 70%;
+    }
+
+    .weddingResourcesGrid button {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 10rem 10rem 0rem 0rem;
+    }
+
+    .weddingResourcesGrid button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    .textContainer {
+        margin: auto;
+        padding: 15rem 0;
+        width: 90%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .weddingResourcesHeading {
+        font-size: 25rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .weddingResourceRectangle h2 {
+        margin-top: 25rem;
+        font-weight: bold;
+    }
+
+    .weddingResourceRectangle p {
+        height: 100%;
+        font-size: 20rem;
+        margin-bottom: 25rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+    /* The sidebar menu */
+    .sideNav {
+        padding: 0rem 0rem 0rem 25rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1.5fr 0.5fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "logo logo logo"
+            "links links links"
+            "social social social";
+        grid-area: sidebar;
+        top: 0;
+        left: 0;
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        overflow: hidden;
+        font-size: 25rem;
+        font-family: 'Calibri';
+    }
+
+    .topNav {
+        display: none;
+    }
+
+    .logo {
+        grid-area: logo;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+
+    .links {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "home home home"
+            "about about about"
+            "weddingCakes weddingCakes weddingCakes"
+            "celebrationCakes celebrationCakes celebrationCakes"
+            "contact contact contact"
+            "weddingResources weddingResources weddingResources"
+            ". . .";
+        grid-area: links;
+    }
+
+    .links div a {
+        color: #000;
+        transition: color ease 0.60s;
+        position: relative;
+    }
+
+
+    .links div a:visited {
+        color: #000;
+    }
+
+    .links div a:hover {
+        color: #949494;
+    }
+
+    .links div a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: top;
+        transition: transform 0.3s ease-in;
+    }
+
+    .links div a:hover::after {
+        transform: scaleX(1);
+        transform-origin: top;
+    }
+
+    .home {
+        grid-area: home;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .about {
+        grid-area: about;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .weddingCakes {
+        grid-area: weddingCakes;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .celebrationCakes {
+        grid-area: celebrationCakes;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact {
+        grid-area: contact;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .weddingResources {
+        grid-area: weddingResources;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social {
+        grid-area: social;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 27.5px;
+    }
+
+    .instagram {
+        grid-area: instagram;
+        width: 40rem;
+    }
+
+    .facebook {
+        grid-area: facebook;
+        width: 40rem;
+    }
+
+    /*Overall style of content pages*/
+    .contentContainer {
+        font-size: 23rem;
+        color: #000;
+        font-family: 'Calibri';
+        margin-left: 300px;
+        padding: 50px 50px 0px 50px;
+    }
+
+    .content {
+        max-width: 100%;
+        width: auto;
+        max-height: 100%;
+        height: auto;
+    }
+
+    .contentContainer .heading {
+        margin-top: 25rem;
+        font-size: 25rem;
+        font-weight: bold;
+    }
+
+    hr.headinglinebreak {
+        border: 0;
+        height: 1px;
+        background: #333;
+        background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    }
+
+    .headinglinebreak {
+        width: 50%;
+        margin: 0 0 35rem 0;
+    }
+
+    /*Home page*/
+    .hero {
+        margin-left: 300px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100%;
+        height: 100%;
+        grid-template-areas:
+            "hero";
+        place-items: center;
+    }
+
+    .hero img {
+        grid-area: hero;
+        max-width: 85%;
+        width: auto;
+        max-height: 90%;
+        height: auto;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        display: block;
+    }
+
+    /*About page*/
+    .abouttext {
+        text-align: left;
+        margin-top: 25rem;
+    }
+
+    .colouredvbar {
+        color: #FFA500;
+        font-weight: bold;
+    }
+
+    .ballyfinItalic {
+        font-style: italic;
+        color: #3b3b3b;
+    }
+
+    .smallSpace {
+        font-size: 5rem;
+    }
+
+    .content #aboutImg {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        grid-area: hero;
+        max-width: 50%;
+        width: 472.5px;
+        max-height: 90%;
+        height: auto;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    /*Contact page*/
+    .contactGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 0.05fr 0.35fr 0.05fr 0.5fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "form"
+            "."
+            "address"
+            "."
+            "map";
+    }
+
+    /*Address*/
+    .address {
+        grid-area: address;
+        text-align: left;
+    }
+
+    .smallPhone {
+        line-height: 60rem;
+    }
+
+    .contactTextBorder {
+        width: 100%;
+        height: 100%;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+        display: flex;
+        margin-right: 0rem;
+    }
+
+    .contactText {
+        line-height: 25rem;
+        margin: auto;
+    }
+
+    /*Map*/
+    #map {
+        grid-area: map;
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    /*Form*/
+    .form {
+        grid-area: form;
+    }
+
+    .formContainer {
+        width: 100%;
+        max-width: 700rem;
+        padding: 20rem;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    .requiredStar {
+        color: red;
+    }
+
+    .form-group #firstName, #lastName {
+        max-width: 30%;
+    }
+
+    .form-group #email,
+    #confirmEmail {
+        max-width: 60%;
+    }
+
+    .form-group #mobileNumber,
+    #landlineNumber {
+        max-width: 30%;
+    }
+
+    .form-group {
+        max-width: 100%;
+        margin-top: 20rem;
+        font-size: 20rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 5rem;
+        font-size: 18rem;
+        border: 1rem solid #D4D4D4;
+        margin-top: 5rem;
+        background-color: #ECECEC;
+        font-family: 'Calibri';
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+    .form-group p {
+        margin-bottom: 5rem;
+    }
+
+    /*Radio styling*/
+    .radioContainer {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 5px;
+        width: 150rem;
+        cursor: pointer;
+        font-size: 18px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .radioContainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: default;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        border: 1rem solid #D4D4D4;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .radioContainer:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .radioContainer input:checked~.checkmark {
+        background-color: #D4D4D4;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .radioContainer input:checked~.checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .radioContainer .checkmark:after {
+        top: 5px;
+        left: 5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    /*Checkbox styling*/
+    .checkboxContainer {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 18px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .checkboxContainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkboxCheckmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border: 1rem solid #D4D4D4;
+        border-radius: 5rem;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .checkboxContainer:hover input~.checkboxCheckmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .checkboxContainer input:checked~.checkboxCheckmark {
+        background-color: #D4D4D4;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkboxCheckmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .checkboxContainer input:checked~.checkboxCheckmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .checkboxContainer .checkboxCheckmark:after {
+        left: 7px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    /*Dropdown/select styling*/
+    .selectdiv {
+        position: relative;
+        /*Don't really need this just for demo styling*/
+    }
+
+    /*IE11 hide native button*/
+    select::-ms-expand {
+        display: none;
+    }
+
+    .selectdiv:after {
+        content: "<>";
+        font: 17px "Consolas", monospace;
+        color: #333;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        left: 195px;
+        /*Adjust for position however you want*/
+        top: 37px;
+        padding: 0 0 2px;
+        /*left line */
+        border-bottom: 1px solid #999;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .selectdiv select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* Add some styling */
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        height: 40px;
+        margin: 5px 0px;
+        padding: 0px 15px;
+        font-size: 18px;
+        line-height: 2;
+        color: rgb(0, 0, 0);
+        background-color: #ECECEC;
+        background-image: none;
+        border: 1rem solid #D4D4D4;
+        border-radius: 5rem;
+        -ms-word-break: normal;
+        word-break: normal;
+    }
+
+    .forminput {
+        border-radius: 5rem;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 20px;
+        font-size: 24px;
+        border-radius: 8rem;
+        background-color: #ECECEC;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #D4D4D4;
+    }
+
+    /*Gallery pages*/
+    .galleryGrid {
+        --gap: 16px;
+        --num-cols: 4;
+        --row-height: 100px;
+
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: repeat(var(--num-cols), 1fr);
+        grid-auto-rows: var(--row-height);
+        gap: var(--gap);
+    }
+
+    .galleryGrid button img,
+    video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .image-grid-col-1 {
+        grid-column: span 1;
+    }
+
+    .image-grid-row-1 {
+        grid-row: span 1;
+    }
+
+    .image-grid-col-2 {
+        grid-column: span 2;
+    }
+
+    .image-grid-row-2 {
+        grid-row: span 2;
+    }
+
+    .image-grid-col-3 {
+        grid-column: span 3;
+    }
+
+    .image-grid-row-3 {
+        grid-row: span 3;
+    }
+
+    /*Cake click pop-up*/
+    .popup {
+        display: contents;
+    }
+
+    .popup .overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+
+    .popup .content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #fff;
+        z-index: 2;
+        text-align: left;
+        padding: 20px;
+        box-sizing: border-box;
+        font-family: 'Calibri';
+        padding: 50rem 60rem;
+        line-height: 1.3;
+        height: 90%;
+        width: 85%;
+        overflow-y: scroll;
+    }
+
+    .popup .popupheading {
+        font-weight: bold;
+        margin-bottom: 25rem;
+    }
+
+    .popup .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+    }
+
+    .popup.active .overlay {
+        display: block;
+    }
+
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popupbutton {
+        cursor: pointer;
+    }
+
+    .slides img,
+    video {
+        margin: auto;
+        display: block;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        margin-bottom: 25rem;
+    }
+
+    .content .portrait {
+        max-width: 60%;
+        width: 472.5px;
+        max-height: 90%;
+        height: auto;
+    }
+
+    .content .landscape {
+        max-width: 100%;
+        width: 800px;
+        max-height: 100%;
+        height: auto;
+    }
+
+    /*Pop-up gallery*/
+    .slideshow-container {
+        max-width: 900px;
+        position: relative;
+        margin: auto;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        padding: 15px;
+        margin-top: -22px;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .dots {
+        text-align: center;
+        margin-bottom: 15rem;
+    }
+
+    .activeDot,
+    .dot:hover {
+        background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    /*Wedding resources page*/
+    .weddingResourcesGrid {
+        --gap: 20px;
+        --num-cols: 3;
+        --row-height: 500px;
+
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: repeat(var(--num-cols), 1fr);
+        grid-auto-rows: var(--row-height);
+        gap: var(--gap);
+        margin-top: 100rem;
+    }
+
+    .squareBorder {
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    .imageContainer {
+        width: 100%;
+        height: 70%;
+    }
+
+    .weddingResourcesGrid button {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 10rem 10rem 0rem 0rem;
+    }
+
+    .weddingResourcesGrid button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    .textContainer {
+        margin: auto;
+        padding: 15rem 0;
+        width: 90%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .weddingResourcesHeading {
+        font-size: 20rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .rectangleContainer {
+        width: 70%;
+        height: 90%;
+        display: grid;
+        gap: 50rem;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 auto;
+    }
+
+    .rectangleContainer {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 700px 700px;
+        grid-template-areas:
+            'weddingResourceRectangle1'
+            'weddingResourceRectangle2';
+    }
+
+    .weddingResourceRectangle1 {
+        grid-area: weddingResourceRectangle1;
+    }
+
+    .weddingResourceRectangle2 {
+        grid-area: weddingResourceRectangle2;
+    }
+
+    .weddingResourceRectangle {
+        width: 80%;
+        height: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 0.40fr;
+        grid-template-areas:
+            'instagram'
+            'text';
+    }
+
+    .weddingResourceRectangle .instaEmbed {
+        grid-area: instagram;
+        height: 100%;
+    }
+
+    .weddingResourceRectangle .rectangleText {
+        grid-area: text;
+        text-align: center;
+    }
+
+    .weddingResourceRectangle h2 {
+        margin-top: 25rem;
+        font-weight: bold;
+    }
+
+    .weddingResourceRectangle p {
+        height: 100%;
+        font-size: 20rem;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+
+    /* The sidebar menu */
+    .sideNav {
+        padding: 0rem 0rem 0rem 25rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1.5fr 0.5fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "logo logo logo"
+            "links links links"
+            "social social social";
+        grid-area: sidebar;
+        top: 0;
+        left: 0;
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        overflow: hidden;
+        font-size: 25rem;
+        font-family: 'Calibri';
+    }
+
+    .topNav {
+        display: none;
+    }
+
+    .logo {
+        grid-area: logo;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+
+    .links {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "home home home"
+            "about about about"
+            "weddingCakes weddingCakes weddingCakes"
+            "celebrationCakes celebrationCakes celebrationCakes"
+            "contact contact contact"
+            "weddingResources weddingResources weddingResources"
+            ". . .";
+        grid-area: links;
+    }
+
+    .links div a {
+        color: #000;
+        transition: color ease 0.60s;
+        position: relative;
+    }
+
+
+    .links div a:visited {
+        color: #000;
+    }
+
+    .links div a:hover {
+        color: #949494;
+    }
+
+    .links div a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: top;
+        transition: transform 0.3s ease-in;
+    }
+
+    .links div a:hover::after {
+        transform: scaleX(1);
+        transform-origin: top;
+    }
+
+    .home {
+        grid-area: home;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .about {
+        grid-area: about;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .weddingCakes {
+        grid-area: weddingCakes;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .celebrationCakes {
+        grid-area: celebrationCakes;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact {
+        grid-area: contact;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .weddingResources {
+        grid-area: weddingResources;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social {
+        grid-area: social;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 27.5px;
+    }
+
+    .instagram {
+        grid-area: instagram;
+        width: 40rem;
+    }
+
+    .facebook {
+        grid-area: facebook;
+        width: 40rem;
+    }
+
+    /*Overall style of content pages*/
+    .contentContainer {
+        font-size: 23rem;
+        color: #000;
+        font-family: 'Calibri';
+        margin-left: 300px;
+        padding: 50px 50px 0px 50px;
+    }
+
+    .content {
+        max-width: 100%;
+        width: auto;
+        max-height: 100%;
+        height: auto;
+    }
+
+    .contentContainer .heading {
+        margin-top: 25rem;
+        font-size: 25rem;
+        font-weight: bold;
+    }
+
+    hr.headinglinebreak {
+        border: 0;
+        height: 1px;
+        background: #333;
+        background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    }
+
+    .headinglinebreak {
+        width: 50%;
+        margin: 0 0 35rem 0;
+    }
+
+    /*Home page*/
+    .hero {
+        margin-left: 300px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100%;
+        height: 100%;
+        grid-template-areas:
+            "hero";
+        place-items: center;
+    }
+
+    .hero img {
+        grid-area: hero;
+        max-width: 85%;
+        width: auto;
+        max-height: 90%;
+        height: auto;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        display: block;
+    }
+
+    /*About page*/
+    .abouttext {
+        text-align: left;
+        margin-top: 25rem;
+    }
+
+    .colouredvbar {
+        color: #FFA500;
+        font-weight: bold;
+    }
+
+    .ballyfinItalic {
+        font-style: italic;
+        color: #3b3b3b;
+    }
+
+    .smallSpace {
+        font-size: 5rem;
+    }
+
+    .content #aboutImg {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        grid-area: hero;
+        max-width: 50%;
+        width: 472.5px;
+        max-height: 90%;
+        height: auto;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    /*Contact page*/
+    .contactGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.15fr 1fr 1fr;
+        grid-template-rows: 0.5fr 0.10fr 0.80fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "form form . address address"
+            "form form . . ."
+            "form form . map map";
+    }
+
+    /*Address*/
+    .address {
+        grid-area: address;
+        text-align: left;
+    }
+
+    .smallPhone {
+        line-height: 60rem;
+    }
+
+    .contactTextBorder {
+        width: 100%;
+        height: 100%;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+        display: flex;
+        margin-right: 0rem;
+    }
+
+    .contactText {
+        line-height: 25rem;
+        margin: auto;
+        padding: 20rem;
+    }
+
+    /*Map*/
+    #map {
+        grid-area: map;
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    /*Form*/
+    .form {
+        grid-area: form;
+    }
+
+    .formContainer {
+        width: 100%;
+        max-width: 700rem;
+        padding: 20rem;
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    .requiredStar {
+        color: red;
+    }
+
+    .form-group #firstName, #lastName {
+        width: 90rem;
+    }
+
+    .form-group #email,
+    #confirmEmail {
+        max-width: 320rem;
+    }
+
+    .form-group #mobileNumber,
+    #landlineNumber {
+        max-width: 190rem;
+    }
+
+    .form-group {
+        max-width: 100%;
+        margin-top: 20rem;
+        font-size: 20rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 5rem;
+        font-size: 18rem;
+        border: 1rem solid #D4D4D4;
+        margin-top: 5rem;
+        background-color: #ECECEC;
+        font-family: 'Calibri';
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+    .form-group p {
+        margin-bottom: 5rem;
+    }
+
+    /*Radio styling*/
+    .radioContainer {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 5px;
+        width: 150rem;
+        cursor: pointer;
+        font-size: 18px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .radioContainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: default;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        border: 1rem solid #D4D4D4;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .radioContainer:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .radioContainer input:checked~.checkmark {
+        background-color: #D4D4D4;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .radioContainer input:checked~.checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .radioContainer .checkmark:after {
+        top: 5px;
+        left: 5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    /*Checkbox styling*/
+    .checkboxContainer {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 18px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .checkboxContainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkboxCheckmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border: 1rem solid #D4D4D4;
+        border-radius: 5rem;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .checkboxContainer:hover input~.checkboxCheckmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .checkboxContainer input:checked~.checkboxCheckmark {
+        background-color: #D4D4D4;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkboxCheckmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .checkboxContainer input:checked~.checkboxCheckmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .checkboxContainer .checkboxCheckmark:after {
+        left: 7px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    /*Dropdown/select styling*/
+    .selectdiv {
+        position: relative;
+        /*Don't really need this just for demo styling*/
+    }
+
+    /*IE11 hide native button*/
+    select::-ms-expand {
+        display: none;
+    }
+
+    .selectdiv:after {
+        content: "<>";
+        font: 17px "Consolas", monospace;
+        color: #333;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        left: 195px;
+        /*Adjust for position however you want*/
+        top: 37px;
+        padding: 0 0 2px;
+        /*left line */
+        border-bottom: 1px solid #999;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .selectdiv select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* Add some styling */
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        height: 40px;
+        margin: 5px 0px;
+        padding: 0px 15px;
+        font-size: 18px;
+        line-height: 2;
+        color: rgb(0, 0, 0);
+        background-color: #ECECEC;
+        background-image: none;
+        border: 1rem solid #D4D4D4;
+        border-radius: 5rem;
+        -ms-word-break: normal;
+        word-break: normal;
+    }
+
+    .forminput {
+        border-radius: 5rem;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 20px;
+        font-size: 24px;
+        border-radius: 8rem;
+        background-color: #ECECEC;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #D4D4D4;
+    }
+
+    /*Gallery pages*/
+    .galleryGrid {
+        --gap: 16px;
+        --num-cols: 4;
+        --row-height: 300px;
+
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: repeat(var(--num-cols), 1fr);
+        grid-auto-rows: var(--row-height);
+        gap: var(--gap);
+    }
+
+    .galleryGrid button img,
+    video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .image-grid-col-1 {
+        grid-column: span 1;
+    }
+
+    .image-grid-row-1 {
+        grid-row: span 1;
+    }
+
+    .image-grid-col-2 {
+        grid-column: span 2;
+    }
+
+    .image-grid-row-2 {
+        grid-row: span 2;
+    }
+
+    .image-grid-col-3 {
+        grid-column: span 3;
+    }
+
+    .image-grid-row-3 {
+        grid-row: span 3;
+    }
+
+    /*Cake click pop-up*/
+    .popup {
+        display: contents;
+    }
+
+    .popup .overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+
+    .popup .content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #fff;
+        z-index: 2;
+        text-align: left;
+        padding: 20px;
+        box-sizing: border-box;
+        font-family: 'Calibri';
+        padding: 50rem 60rem;
+        line-height: 1.3;
+        height: 90%;
+        width: 85%;
+        overflow-y: scroll;
+    }
+
+    .popup .popupheading {
+        font-weight: bold;
+        margin-bottom: 25rem;
+    }
+
+    .popup .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+    }
+
+    .popup.active .overlay {
+        display: block;
+    }
+
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popupbutton {
+        cursor: pointer;
+    }
+
+    .slides img,
+    video {
+        margin: auto;
+        display: block;
+        box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.6);
+        margin-bottom: 25rem;
+    }
+
+    .content .portrait {
+        max-width: 60%;
+        width: 472.5px;
+        max-height: 90%;
+        height: auto;
+    }
+
+    .content .landscape {
+        max-width: 100%;
+        width: 800px;
+        max-height: 100%;
+        height: auto;
+    }
+
+    /*Pop-up gallery*/
+    .slideshow-container {
+        max-width: 900px;
+        position: relative;
+        margin: auto;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        padding: 15px;
+        margin-top: -22px;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .dots {
+        text-align: center;
+        margin-bottom: 15rem;
+    }
+
+    .activeDot,
+    .dot:hover {
+        background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    /*Wedding resources page*/
+    .weddingResourcesGrid {
+        --gap: 50px;
+        --num-cols: 3;
+        --row-height: 500px;
+
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: repeat(var(--num-cols), 1fr);
+        grid-auto-rows: var(--row-height);
+        gap: var(--gap);
+        margin-top: 100rem;
+    }
+
+    .squareBorder {
+        box-shadow: 5rem 5rem 20rem 5rem rgba(0, 0, 0, 0.3);
+        border-radius: 10rem 10rem 10rem 10rem;
+    }
+
+    .imageContainer {
+        width: 100%;
+        height: 85%;
+    }
+
+    .weddingResourcesGrid button {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 10rem 10rem 0rem 0rem;
+    }
+
+    .weddingResourcesGrid button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .textContainer {
+        margin: auto;
+        padding: 15rem 0;
+        width: 90%;
+        height: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .weddingResourcesHeading {
+        font-size: 25rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .rectangleContainer {
+        width: 70%;
+        height: 90%;
+        display: grid;
+        gap: 50rem;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 auto;
+    }
+
+    .weddingResourceRectangle {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 600px 50px;
+        grid-template-areas:
+            'instagram'
+            'text';
+    }
+
+    .weddingResourceRectangle blockquote {
+        grid-area: instagram;
+    }
+
+    .weddingResourceRectangle rectangleText {
+        grid-area: text;
+    }
+
+    .instaEmbed {
+        height: 100%;
+    }
+
+    .rectangleText {
+        text-align: center;
+    }
+
+    .weddingResourceRectangle h2 {
+        font-weight: bold;
+    }
+
+    .weddingResourceRectangle p {
+        height: 100%;
+        font-size: 20rem;
+    }
+}
